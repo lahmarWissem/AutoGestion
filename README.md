@@ -1,69 +1,145 @@
-# AutoGestion
-# SpringBoot Angular App
-Cars Management application using Spring Boot Angular 14.2.6. and MySql Data base
+# 🚗 AutoGestion
 
-<p align="center">
-  <img src="./src/screenshots/login.PNG" alt="Image" />
- <img src="./src/screenshots/CarsManagement.PNG" alt="Image" />
-  <img src="./src/screenshots/dragAndDrop.PNG" alt="Image" />
-<img src="./src/screenshots/addcars.PNG" alt="Image" />
-<img src="./src/screenshots/addnewuser.PNG" alt="Image" />
-<img src="./src/screenshots/dashboard.PNG" alt="Image" />
-<img src="./src/screenshots/modelesmanagement.PNG" alt="Image" />
-<img src="./src/screenshots/UsersManagment.PNG" alt="Image" />
-<img src="./src/screenshots/recherche.PNG" alt="Image" />
-<img src="./src/screenshots/ypdateuser.PNG" alt="Image" />
+Application web full-stack de gestion de parc automobile, développée avec **Angular** et **Spring Boot**, conteneurisée avec **Docker**.
 
-  
-</p>
+## 🛠️ Technologies
 
-## Technologies :
-1. Spring Data Rest
-2. Spring Security
-3. java-jwt
-4. Bootstrap and Css 
-5. Angular 
-6. Pipe ,token-interceptor
+| Couche | Technologie |
+|--------|------------|
+| Frontend | Angular 14, TypeScript, Bootstrap 5 |
+| Backend | Spring Boot 2.6, Java 8, Spring Security (JWT) |
+| Base de données | MySQL 8.0 |
+| Conteneurisation | Docker, Docker Compose |
 
+## 📋 Fonctionnalités
 
-## Features :
-1. SignIn - SignUp(add Users with roles ) - Logout
-2. SignIn and Generate Token 
-3. Search by car name and modele name
-4. Uoload Images
-5. Viewing users page and able to edit info, upload images and delete users
-6. Viewing cars page and able to edit cars, upload images and delete cars
-6. Viewing models page and able to edit models, add and delete model
-7.drag and drop 
+- **Authentification** : Connexion / Inscription sécurisées avec JWT
+- **Gestion des voitures** : CRUD complet avec upload d'images
+- **Gestion des modèles** : Créer, modifier, supprimer des modèles de voitures
+- **Gestion des utilisateurs** : CRUD avec attribution de rôles et photos de profil (Admin)
+- **Gestion des rôles** : Créer, modifier, supprimer des rôles (Admin)
+- **Recherche** : Recherche de voitures par nom
+- **Drag & Drop** : Réorganisation des voitures par glisser-déposer
+- **Dashboard** : Tableau de bord avec statistiques
 
-# link for backend Spring micro service and Spring Voiture
-1. https://github.com/lahmarWissem/Spring_microServices.git
-2. https://github.com/lahmarWissem/SpringProjectVoiture.git
+## 🚀 Comment lancer le projet
 
-# Voitures
+### Prérequis
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) installé et lancé
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.6.
+### Lancement
 
-## Development server
+```bash
+# 1. Cloner le projet
+git clone https://github.com/lahmarWissem/AutoGestion.git
+cd AutoGestion
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+# 2. Lancer tous les services (MySQL + Backend + Frontend)
+docker-compose up -d --build
+```
 
-## Code scaffolding
+### Accès
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+| Service | URL |
+|---------|-----|
+| 🌐 Frontend | [http://localhost:4200](http://localhost:4200) |
+| ⚙️ Backend API | [http://localhost:8081](http://localhost:8081) |
+| 🗄️ MySQL | `localhost:3306` |
 
-## Build
+### Comptes par défaut
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+| Utilisateur | Mot de passe | Rôle |
+|-------------|-------------|------|
+| `admin` | `admin123` | ADMIN |
+| `amina` | `amina123` | USER |
 
-## Running unit tests
+### Arrêter les services
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```bash
+docker-compose down
+```
 
-## Running end-to-end tests
+### Réinitialiser la base de données
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+docker-compose down -v    # Supprime les volumes (données MySQL)
+docker-compose up -d --build
+```
 
-## Further help
+## 📁 Structure du projet
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```
+AutoGestion/
+├── miniProjetAngular/        # Frontend Angular
+│   └── src/app/
+│       ├── admin-dashboard/  # Tableau de bord
+│       ├── list-voitures/    # Liste des voitures
+│       ├── add-voitures/     # Ajouter une voiture
+│       ├── update-voiture/   # Modifier une voiture
+│       ├── liste-users/      # Liste des utilisateurs
+│       ├── add-user/         # Ajouter un utilisateur
+│       ├── update-user/      # Modifier un utilisateur
+│       ├── list-roles/       # Liste des rôles
+│       ├── add-role/         # Ajouter un rôle
+│       ├── update-role/      # Modifier un rôle
+│       ├── list-modeles/     # Gestion des modèles
+│       ├── recherche-par-nom/# Recherche
+│       ├── login/            # Page de connexion
+│       ├── register/         # Page d'inscription
+│       └── services/         # Services Angular (API)
+├── SpringProjectVoiture/     # Backend Spring Boot
+│   └── src/main/java/com/amina/voiture/
+│       ├── entities/         # Entités JPA
+│       ├── repos/            # Repositories
+│       ├── rest/             # Contrôleurs REST
+│       ├── services/         # Interfaces de services
+│       ├── serviceImpl/      # Implémentations
+│       └── Security/         # Configuration JWT
+├── docker-compose.yml        # Orchestration Docker
+├── init-db.sql               # Script d'initialisation DB
+└── screenshots/              # Captures d'écran
+```
+
+## 📸 Captures d'écran
+
+### Connexion
+![Login](screenshots/login.png)
+
+### Inscription
+![Register](screenshots/register.png)
+
+### Tableau de bord
+![Dashboard](screenshots/dashboard.png)
+
+### Liste des voitures
+![Liste voitures](screenshots/list-voiture.png)
+
+### Ajouter une voiture
+![Ajouter voiture](screenshots/ajouter-voiture.png)
+
+### Modifier une voiture
+![Modifier voiture](screenshots/modifier-voiture.png)
+
+### Recherche de voitures
+![Recherche](screenshots/recherche-voiture.png)
+
+### Liste des utilisateurs
+![Liste utilisateurs](screenshots/list-users.png)
+
+### Ajouter un utilisateur
+![Ajouter utilisateur](screenshots/ajouter-user.png)
+
+### Modifier un utilisateur
+![Modifier utilisateur](screenshots/modifier-user.png)
+
+### Gestion des modèles
+![Modèles](screenshots/list-model-et-ajouter-model-et-delete.png)
+
+### Drag & Drop
+![Drag and Drop](screenshots/drag-and-drop.png)
+
+### Diagramme de classes
+![Diagramme de classes](screenshots/class_diagram_bw_1772705498209.png)
+
+### Diagramme de cas d'utilisation
+![Use Case](screenshots/use_case_bw_1772705483149.png)
