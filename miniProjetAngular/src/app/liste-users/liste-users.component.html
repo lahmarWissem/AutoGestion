@@ -1,0 +1,83 @@
+<div class="container-fluid p-3 host">
+  <!-- Top Bar: Title & Action -->
+  <div class="card mb-4 border-0 shadow-sm" style="border-radius: 12px;">
+    <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-center p-4">
+      <div class="d-flex align-items-center mb-3 mb-md-0">
+        <div class="icon-circle bg-primary-light me-3">
+          <i class="fas fa-users" style="color: #005a81; font-size: 1.5rem;"></i>
+        </div>
+        <div>
+          <h4 class="mb-0 fw-bold text-dark">Gestion des Utilisateurs</h4>
+          <p class="text-muted mb-0 mt-1 small">Gérez les comptes et les rôles</p>
+        </div>
+      </div>
+
+      <div *ngIf="authService.isAdmin()">
+        <a routerLink="/home/addUser" class="btn btn-primary-custom d-flex align-items-center">
+          <i class="fas fa-user-plus me-2"></i> Ajouter un Utilisateur
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="numberOfusers == 0; else show" class="empty-state">
+    <i class="fas fa-users-slash fa-3x mb-3 text-muted"></i>
+    <h5 class="fw-bold">Aucune donnée disponible</h5>
+    <p class="text-muted">Aucun utilisateur n'a été trouvé dans la base de données.</p>
+  </div>
+
+  <!-- Results Table -->
+  <ng-template #show>
+    <div class="card border-0 shadow-sm" style="border-radius: 12px; overflow: hidden;">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0 custom-table">
+          <thead>
+            <tr>
+              <th scope="col" class="text-center" style="width: 80px;">Id</th>
+              <th scope="col" style="width: 100px;">Profil</th>
+              <th scope="col">Identifiant</th>
+              <th scope="col">Rôle(s)</th>
+              <th scope="col" class="text-center" style="width: 150px;" *ngIf="authService.isAdmin()">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users; let i = index">
+              <td data-label="Id" class="text-center fw-bold text-muted">#{{ user.user_id }}</td>
+
+              <td data-label="Profil">
+                <img [src]="listImages[i]" alt="Photo de profil" class="user-avatar shadow-sm">
+              </td>
+
+              <td data-label="Identifiant">
+                <span class="user-name fw-bold">{{ user.username }}</span>
+              </td>
+
+              <td data-label="Rôle(s)">
+                <div class="d-flex flex-wrap gap-2">
+                  <span *ngFor="let role of user.roles" class="role-badge"
+                    [ngClass]="{'admin-role': role.role === 'ADMIN', 'user-role': role.role === 'USER'}">
+                    <i class="fas"
+                      [ngClass]="{'fa-user-shield': role.role === 'ADMIN', 'fa-user': role.role === 'USER'}"></i>
+                    {{ role.role }}
+                  </span>
+                </div>
+              </td>
+
+              <td data-label="Actions" class="text-center" *ngIf="authService.isAdmin()">
+                <div class="d-flex justify-content-center gap-2">
+                  <a [routerLink]="['/home/updateUser', user.user_id]" class="btn btn-action btn-edit" title="Modifier">
+                    <i class="fas fa-pen"></i>
+                  </a>
+                  <button class="btn btn-action btn-delete" (click)="deleteUser(user.user_id)" title="Supprimer">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </ng-template>
+</div>

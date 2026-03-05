@@ -1,0 +1,79 @@
+<div class="container-fluid p-3 host">
+    <!-- Top Bar: Title & Action -->
+    <div class="card mb-4 border-0 shadow-sm" style="border-radius: 12px;">
+        <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-center p-4">
+            <div class="d-flex align-items-center mb-3 mb-md-0">
+                <div class="icon-circle bg-primary-light me-3">
+                    <i class="fas fa-user-tag" style="color: #005a81; font-size: 1.5rem;"></i>
+                </div>
+                <div>
+                    <h4 class="mb-0 fw-bold text-dark">Gestion des Rôles</h4>
+                    <p class="text-muted mb-0 mt-1 small">Créez, modifiez et supprimez les rôles</p>
+                </div>
+            </div>
+
+            <div>
+                <a routerLink="/home/addRole" class="btn btn-primary-custom d-flex align-items-center">
+                    <i class="fas fa-plus me-2"></i> Ajouter un Rôle
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error Alert -->
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="err == 1">
+        <i class="fas fa-exclamation-triangle me-2"></i> {{ message }}
+        <button type="button" class="btn-close" (click)="err=0" aria-label="Close"></button>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="numberOfRoles == 0; else show" class="empty-state">
+        <i class="fas fa-user-tag fa-3x mb-3 text-muted"></i>
+        <h5 class="fw-bold">Aucun rôle disponible</h5>
+        <p class="text-muted">Aucun rôle n'a été trouvé dans la base de données.</p>
+    </div>
+
+    <!-- Results Table -->
+    <ng-template #show>
+        <div class="card border-0 shadow-sm" style="border-radius: 12px; overflow: hidden;">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0 custom-table">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="text-center" style="width: 80px;">Id</th>
+                            <th scope="col">Nom du rôle</th>
+                            <th scope="col" class="text-center" style="width: 150px;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let role of roles">
+                            <td data-label="Id" class="text-center fw-bold text-muted">#{{ role.role_id }}</td>
+
+                            <td data-label="Rôle">
+                                <span class="role-badge"
+                                    [ngClass]="{'admin-role': role.role === 'ADMIN', 'user-role': role.role !== 'ADMIN'}">
+                                    <i class="fas"
+                                        [ngClass]="{'fa-user-shield': role.role === 'ADMIN', 'fa-user': role.role !== 'ADMIN'}"></i>
+                                    {{ role.role }}
+                                </span>
+                            </td>
+
+                            <td data-label="Actions" class="text-center">
+                                <div class="d-flex justify-content-center gap-2">
+                                    <a [routerLink]="['/home/updateRole', role.role_id]" class="btn btn-action btn-edit"
+                                        title="Modifier">
+                                        <i class="fas fa-pen"></i>
+                                    </a>
+                                    <button class="btn btn-action btn-delete" (click)="deleteRole(role.role_id)"
+                                        title="Supprimer">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </ng-template>
+</div>

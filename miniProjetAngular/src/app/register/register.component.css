@@ -1,0 +1,132 @@
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f7f6;
+    background-image: url("../../assets/bg2.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 20px;
+}
+
+.login-container {
+    display: flex;
+    width: 100%;
+    max-width: 1000px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    min-height: 600px;
+}
+
+/* Left Illustration Side */
+.login-illustration {
+    flex: 1;
+    background: linear-gradient(135deg, #005a81, #0088cc);
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.illustration-content {
+    max-width: 400px;
+}
+
+.illustration-content img {
+    max-width: 80%;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+}
+
+/* Right Form Side */
+.login-form-wrapper {
+    flex: 1.2;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: white;
+}
+
+.login-form-content {
+    max-width: 450px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.form-label {
+    font-weight: 600;
+    color: #4a5568;
+    font-size: 0.85rem;
+    margin-bottom: 6px;
+}
+
+.input-group-text {
+    background: transparent;
+    border-right: none;
+    color: #adb5bd;
+}
+
+.form-control,
+.form-select {
+    border-left: none;
+    font-size: 0.95rem;
+    padding: 10px 16px 10px 0;
+}
+
+.form-control:focus,
+.form-select:focus {
+    box-shadow: none;
+    border-color: #dee2e6;
+}
+
+.input-group:focus-within {
+    border-radius: 6px;
+    box-shadow: 0 0 0 3px rgba(0, 90, 129, 0.1);
+}
+
+.input-group:focus-within .input-group-text,
+.input-group:focus-within .form-control,
+.input-group:focus-within .form-select {
+    border-color: #005a81;
+    color: #005a81;
+}
+
+.btn-primary-custom {
+    background: linear-gradient(135deg, #005a81, #0088cc);
+    color: white;
+    border: none;
+    font-weight: 600;
+    padding: 12px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary-custom:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 90, 129, 0.3);
+    color: white;
+}
+
+.btn-primary-custom:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    color: white;
+}
+
+/* Alerts */
+.alert {
+    font-size: 0.85rem;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 991px) {
+    .login-container {
+        max-width: 500px;
+    }
+}

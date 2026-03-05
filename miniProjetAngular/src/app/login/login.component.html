@@ -1,0 +1,101 @@
+<div class="login-page">
+    <div class="login-container">
+        <!-- Left Side: Illustration -->
+        <div class="login-illustration d-none d-lg-flex">
+            <div class="illustration-content">
+                <img src="../../assets/undraw_welcome_cats_thqn.svg" alt="Welcome" class="img-fluid">
+                <h2 class="mt-4 text-white">Bienvenue sur AutoGestion</h2>
+                <p class="text-white-50">Gérez vos voitures, modèles et utilisateurs en toute simplicité.</p>
+            </div>
+        </div>
+
+        <!-- Right Side: Form -->
+        <div class="login-form-wrapper">
+            <div class="login-form-content">
+                <div class="text-center d-lg-none mb-4">
+                    <img src="../../assets/undraw_welcome_cats_thqn.svg" alt="avatar" width="100px">
+                    <h3 class="mt-2" style="color: #005a81; font-weight: 700;">AutoGestion</h3>
+                </div>
+
+                <h3 class="mb-1" style="color: #333; font-weight: 700;">Connexion</h3>
+                <p class="text-muted mb-4">Veuillez vous connecter à votre compte</p>
+
+                <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="err == 1">
+                    <i class="fas fa-exclamation-triangle me-2"></i> Identifiant ou mot de passe incorrect
+                    <button type="button" class="btn-close" (click)="err=0" aria-label="Close"></button>
+                </div>
+
+                <form [formGroup]="loginForm" (ngSubmit)="onLoggedin()" autocomplete="off">
+
+                    <!-- Identifiant -->
+                    <div class="form-group mb-4">
+                        <label class="form-label">Identifiant</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            <input type="text" formControlName="username" class="form-control form-control-lg"
+                                placeholder="Votre identifiant" [class.is-invalid]="submitted && f['username'].errors"
+                                autocomplete="username">
+                        </div>
+                        <div *ngIf="submitted && f['username'].errors" class="invalid-feedback d-block mt-1">
+                            <span *ngIf="f['username'].errors['required']">L'identifiant est requis</span>
+                            <span *ngIf="f['username'].errors['minlength']">L'identifiant doit contenir au moins 3
+                                caractères</span>
+                        </div>
+                    </div>
+
+                    <!-- Mot de passe -->
+                    <div class="form-group mb-4">
+                        <label class="form-label">Mot de passe</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                            <input type="password" formControlName="password" class="form-control form-control-lg"
+                                placeholder="Votre mot de passe" [class.is-invalid]="submitted && f['password'].errors"
+                                autocomplete="current-password">
+                        </div>
+                        <div *ngIf="submitted && f['password'].errors" class="invalid-feedback d-block mt-1">
+                            <span *ngIf="f['password'].errors['required']">Le mot de passe est requis</span>
+                            <span *ngIf="f['password'].errors['minlength']">Le mot de passe doit contenir au moins 3
+                                caractères</span>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-primary-custom w-100 btn-lg mb-4">
+                        Se Connecter <i class="fas fa-sign-in-alt ms-2"></i>
+                    </button>
+
+                    <!-- Register Link -->
+                    <div class="text-center mb-4">
+                        <span class="text-muted">Pas encore de compte ?</span>
+                        <a routerLink="/register" class="ms-1 fw-bold"
+                            style="color: #005a81; text-decoration: none;">S'inscrire ici</a>
+                    </div>
+
+                    <!-- Demo Accounts Section -->
+                    <div class="demo-section mt-4">
+                        <div class="demo-divider">
+                            <span>COMPTES DÉMO</span>
+                        </div>
+                        <div class="d-flex gap-3 justify-content-center mt-3 flex-wrap">
+                            <button type="button" class="demo-badge demo-admin" (click)="fillDemo('admin', 'admin123')">
+                                <div class="demo-icon"><i class="fas fa-user-shield"></i></div>
+                                <div class="demo-info">
+                                    <strong>Admin</strong>
+                                    <small>admin / admin123</small>
+                                </div>
+                            </button>
+                            <button type="button" class="demo-badge demo-user" (click)="fillDemo('amina', 'amina123')">
+                                <div class="demo-icon"><i class="fas fa-user"></i></div>
+                                <div class="demo-info">
+                                    <strong>Utilisateur</strong>
+                                    <small>amina / amina123</small>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

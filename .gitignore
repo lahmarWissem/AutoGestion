@@ -1,0 +1,49 @@
+# === Angular (Frontend) ===
+miniProjetAngular/node_modules/
+miniProjetAngular/dist/
+miniProjetAngular/.angular/
+miniProjetAngular/.sass-cache/
+miniProjetAngular/build.log
+
+# === Spring Boot (Backend) ===
+SpringProjectVoiture/target/
+SpringProjectVoiture/*.jar
+SpringProjectVoiture/.mvn/
+SpringProjectVoiture/mvnw
+SpringProjectVoiture/mvnw.cmd
+
+# === IDE ===
+.vscode/
+.idea/
+*.iml
+*.iws
+*.ipr
+.project
+.classpath
+.settings/
+
+# === OS ===
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# === Docker ===
+# Keep docker-compose.yml but ignore ephemeral volumes
+mysql-data/
+
+# === Logs ===
+*.log
+logs.txt
+backend-logs.txt
+backend-error-logs.txt
+build_log.txt
+cars.log
+
+# === Misc ===
+IMAGE_UPLOAD_VALIDATION.md
+UML_DIAGRAMS_ASCII.md
+PROJECT_FEATURES.md
+PROJECT_OVERVIEW.md
+database-setup.sql
+project screen shots/
+.gemini/

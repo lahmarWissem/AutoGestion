@@ -1,0 +1,128 @@
+<div class="row host">
+  <!-- Top Toolbar -->
+  <div class="toolbar mb-4">
+    <div *ngIf="authService.isAdmin()">
+      <a routerLink="/home/addvoiture" class="btn btn-add">
+        <i class="fas fa-plus-circle me-2"></i>Ajouter une Voiture
+      </a>
+    </div>
+    <div class="filter-group">
+      <div class="input-group">
+        <span class="input-group-text"><i class="fas fa-filter"></i></span>
+        <select class="form-select" id="idCat" name="idCat" [(ngModel)]="IdModele" (change)="onChange()">
+          <option value="" selected>Tous les modèles</option>
+          <option *ngFor="let cat of modeles" value="{{ cat.idMod }}">
+            {{ cat.nomMod }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="numberOfvoitures == 0; else show" class="empty-state text-center py-5">
+    <i class="fas fa-car fa-3x mb-3"></i>
+    <h5>Aucune donnée disponible</h5>
+    <p class="text-muted">Aucune voiture n'a été trouvée dans la base de données.</p>
+  </div>
+
+  <ng-template #show>
+    <!--  <table>
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Nom</th>
+          <th scope="col">Prix</th>
+          <th scope="col">Date Création</th>
+          <th scope="col">Modele</th>
+          <th scope="col">Image</th>
+          <th scope="col" *ngIf="authService.isAdmin()" >Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let voiture of voitures ;let i= index">
+
+          <td>{{ voiture.idVoiture }}</td>
+          <td>{{ voiture.nomVoiture }}</td>
+          <td>{{ voiture.prixVoiture }}</td>
+          <td>{{ voiture.dateCreation | date: "dd/MM/yyyy" }}</td>
+          <td>{{voiture?.modele?.nomMod}}</td>
+          <td data-label="image"><img [src]="listImages[i]" alt="img" style="width: 120px; height:90px"></td>
+          <td *ngIf="authService.isAdmin()" data-label="Action">
+            <div  >
+              <button  class="btn btn-sm me-2" [routerLink]="['/home/updatevoiture',voiture.idVoiture]"
+                style="background-color: #005a81; color: #FFF;"><i class="fas fa-pen"></i></button>
+              <button class="btn btn-sm me-2" (click)="supprimerVoiture(voiture)"
+                style="background-color: #FF3B3F; color: #FFF;"><i class="fas fa-times fa-lg"></i></button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table> -->
+
+
+    <div class="col-lg-4 host" *ngFor="let voiture of voitures; let i = index">
+      <div class="card mb-3">
+        <div class="bb">
+          <img [src]="listImages[i]" class="card-img-top img-fluid rounded-start" style="width: 500px; height: 300px" />
+          <div class="bot">
+            <h5>
+              <span>{{ voiture.nomVoiture }}</span>
+            </h5>
+            <div class="price">
+              {{ voiture.prixVoiture }}
+              <span>DT</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; margin-left: 15px;">
+          <div>
+            <h3 class="card-title">{{ voiture?.modele?.nomMod }}</h3>
+
+            <p class="card-title">
+              <small class="text-muted">{{
+                voiture.dateCreation | date : "dd/MM/yyyy"
+                }}</small>
+            </p>
+          </div>
+
+          <div class="btnn" *ngIf="authService.isAdmin()">
+            <button class="btn me-2 mt-3" [routerLink]="['/home/updatevoiture', voiture.idVoiture]"
+              style="background-color: #005a81; color: #fff">
+              <i class="fas fa-pen"></i>
+            </button>
+            <button class="btn me-2 mt-3" (click)="supprimerVoiture(voiture)"
+              style="background-color: #ff3b3f; color: #fff">
+              <i class="fas fa-times fa-lg"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link" style="cursor: pointer;" (click)="rewind()" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+
+        <li class="page-item" *ngFor="let p of totalPages; let i = index">
+          <a class="page-link" style="cursor: pointer;" [ngClass]="{'': i === page }" (click)="setPage(i)">{{ i+1 }}</a>
+        </li>
+
+        <li class="page-item">
+          <a class="page-link" style="cursor: pointer;" (click)="forward()" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+
+  </ng-template>
+</div>

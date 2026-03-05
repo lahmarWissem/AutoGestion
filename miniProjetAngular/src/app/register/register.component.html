@@ -1,0 +1,145 @@
+<div class="login-page">
+    <div class="login-container">
+        <!-- Left Side: Illustration -->
+        <div class="login-illustration d-none d-lg-flex">
+            <div class="illustration-content">
+                <h2 class="text-white">Rejoignez-nous !</h2>
+                <p class="text-white-50">Créez votre compte pour commencer à gérer vos voitures et modèles.</p>
+                <img src="../../assets/undraw_welcome_cats_thqn.svg" alt="Welcome" class="img-fluid mt-4">
+            </div>
+        </div>
+
+        <!-- Right Side: Form -->
+        <div class="login-form-wrapper">
+            <div class="login-form-content">
+                <div class="text-center d-lg-none mb-4">
+                    <img src="../../assets/undraw_welcome_cats_thqn.svg" alt="avatar" width="80px">
+                    <h4 class="mt-2" style="color: #005a81; font-weight: 700;">AutoGestion</h4>
+                </div>
+
+                <h3 class="mb-1" style="color: #333; font-weight: 700;">Inscription</h3>
+                <p class="text-muted mb-4">Créez un nouveau compte</p>
+
+                <!-- Alerts -->
+                <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="err == 1">
+                    <i class="fas fa-exclamation-triangle me-2"></i> Une erreur s'est produite lors de l'inscription.
+                    <button type="button" class="btn-close" (click)="err=0" aria-label="Close"></button>
+                </div>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="err == 2">
+                    <i class="fas fa-exclamation-triangle me-2"></i> L'image ne doit pas dépasser 5 MB.
+                    <button type="button" class="btn-close" (click)="err=0" aria-label="Close"></button>
+                </div>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="err == 3">
+                    <i class="fas fa-exclamation-triangle me-2"></i> Format d'image non valide (JPG, PNG, WEBP).
+                    <button type="button" class="btn-close" (click)="err=0" aria-label="Close"></button>
+                </div>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="err == 4">
+                    <i class="fas fa-exclamation-triangle me-2"></i> Le fichier doit avoir une extension valide.
+                    <button type="button" class="btn-close" (click)="err=0" aria-label="Close"></button>
+                </div>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="err == 5">
+                    <i class="fas fa-exclamation-triangle me-2"></i> Cet identifiant est déjà utilisé.
+                    <button type="button" class="btn-close" (click)="err=0" aria-label="Close"></button>
+                </div>
+                <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="success">
+                    <i class="fas fa-check-circle me-2"></i> Inscription réussie ! Redirection...
+                </div>
+
+                <form [formGroup]="registerForm" (ngSubmit)="onRegister()" autocomplete="off">
+
+                    <!-- Identifiant -->
+                    <div class="form-group mb-3">
+                        <label class="form-label">Identifiant <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            <input type="text" formControlName="username" class="form-control"
+                                placeholder="Votre identifiant" [class.is-invalid]="submitted && f['username'].errors"
+                                autocomplete="username">
+                        </div>
+                        <div *ngIf="submitted && f['username'].errors" class="invalid-feedback d-block mt-1">
+                            <span *ngIf="f['username'].errors['required']">L'identifiant est requis</span>
+                            <span *ngIf="f['username'].errors['minlength']">Au moins 3 caractères</span>
+                            <span *ngIf="f['username'].errors['maxlength']">Maximum 50 caractères</span>
+                        </div>
+                    </div>
+
+                    <!-- Mot de passe -->
+                    <div class="row">
+                        <div class="col-md-6 form-group mb-3">
+                            <label class="form-label">Mot de passe <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                <input type="password" formControlName="password" class="form-control"
+                                    placeholder="Mot de passe" [class.is-invalid]="submitted && f['password'].errors"
+                                    autocomplete="new-password">
+                            </div>
+                            <div *ngIf="submitted && f['password'].errors" class="invalid-feedback d-block mt-1">
+                                <span *ngIf="f['password'].errors['required']">Le mot de passe est requis</span>
+                                <span *ngIf="f['password'].errors['minlength']">Au moins 6 caractères</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <label class="form-label">Confirmer <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-check-double"></i></span>
+                                <input type="password" formControlName="confirmPassword" class="form-control"
+                                    placeholder="Confirmer"
+                                    [class.is-invalid]="submitted && f['confirmPassword'].errors"
+                                    autocomplete="new-password">
+                            </div>
+                            <div *ngIf="submitted && f['confirmPassword'].errors" class="invalid-feedback d-block mt-1">
+                                <span *ngIf="f['confirmPassword'].errors['required']">La confirmation est requise</span>
+                                <span *ngIf="f['confirmPassword'].errors['passwordMismatch']">Les mots de passe ne
+                                    correspondent pas</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rôle -->
+                    <div class="form-group mb-3">
+                        <label class="form-label">Rôle <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-user-tag"></i></span>
+                            <select formControlName="role" class="form-select"
+                                [class.is-invalid]="submitted && f['role'].errors">
+                                <option value="" disabled selected>Sélectionnez un rôle</option>
+                                <option *ngFor="let role of availableRoles" [value]="role.role">
+                                    {{ role.role === 'ADMIN' ? 'Administrateur' : 'Utilisateur' }}
+                                </option>
+                            </select>
+                        </div>
+                        <div *ngIf="submitted && f['role'].errors" class="invalid-feedback d-block mt-1">
+                            <span *ngIf="f['role'].errors['required']">Le rôle est requis</span>
+                        </div>
+                    </div>
+
+                    <!-- Image Upload -->
+                    <div class="form-group mb-4">
+                        <label class="form-label">Image de profil (optionnel)</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-image"></i></span>
+                            <input type="file" (change)="onImageUpload($event)" class="form-control"
+                                accept="image/jpeg,image/jpg,image/png,image/webp">
+                        </div>
+                        <small class="text-muted mt-1 d-block">Max 5 MB - Formats: JPG, PNG, WEBP</small>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-primary-custom w-100 btn-lg mb-4"
+                        [disabled]="registerForm.invalid">
+                        S'inscrire <i class="fas fa-user-plus ms-2"></i>
+                    </button>
+
+                    <!-- Login Link -->
+                    <div class="text-center">
+                        <span class="text-muted">Déjà un compte ?</span>
+                        <a routerLink="/login" class="ms-1 fw-bold"
+                            style="color: #005a81; text-decoration: none;">Connectez-vous ici</a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

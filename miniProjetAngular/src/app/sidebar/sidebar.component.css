@@ -1,0 +1,12 @@
+.color-red {
+    background-color: #FF3B3F ;
+}
+.bg{
+    background: linear-gradient(to bottom right, #CAEBF2 , #EFEFEF);
+  
+  }
+
+.active {
+    color: #005a81 !important;
+    
+}

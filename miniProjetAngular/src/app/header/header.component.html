@@ -1,0 +1,33 @@
+<header class="app-header">
+    <div class="header-left">
+        <label for="nav-toggle" class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </label>
+        <div class="brand">
+            <img src="assets/logo.svg" alt="AutoGestion" class="header-logo">
+        </div>
+    </div>
+
+    <div class="header-right">
+        <div class="profile-wrapper" (click)="toggleDropdown()">
+            <img [src]="ImageUser" class="profile-photo" alt="Profile">
+            <span class="profile-name">{{authService.loggedUser}}</span>
+            <i class="fas fa-chevron-down ms-1" style="font-size: 0.7rem; color: #888;"></i>
+        </div>
+
+        <div class="profile-dropdown" *ngIf="showDropdown">
+            <div class="dropdown-header">
+                <img [src]="ImageUser" class="dropdown-avatar" alt="Profile">
+                <div>
+                    <strong>{{authService.loggedUser}}</strong>
+                    <small class="d-block text-muted">{{authService.isAdmin() ? 'Administrateur' :
+                        'Utilisateur'}}</small>
+                </div>
+            </div>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" (click)="onLogout()">
+                <i class="fas fa-sign-out-alt me-2"></i>Déconnexion
+            </a>
+        </div>
+    </div>
+</header>

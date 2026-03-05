@@ -1,0 +1,140 @@
+<div class="dashboard-container host">
+  <!-- Header -->
+  <div class="dashboard-header mb-4">
+    <h4 class="mb-0"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</h4>
+    <p class="text-muted mb-0">Vue d'ensemble de votre application</p>
+  </div>
+
+  <!-- Loading Spinner -->
+  <div *ngIf="isLoading" class="text-center py-5">
+    <div class="spinner-border" style="color: #005a81;" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <p class="text-muted mt-2">Chargement des données...</p>
+  </div>
+
+  <!-- Stats Cards Row 1 -->
+  <div *ngIf="!isLoading" class="row g-4 mb-4">
+    <!-- Voitures Card -->
+    <div class="col-xl-3 col-md-6">
+      <div class="stat-card" routerLink="/home/listVoiture" style="cursor: pointer;">
+        <div class="stat-card-body">
+          <div class="stat-info">
+            <span class="stat-label">Total Voitures</span>
+            <h2 class="stat-value">{{ totalVoitures }}</h2>
+          </div>
+          <div class="stat-icon" style="background: linear-gradient(135deg, #005a81, #0088cc);">
+            <i class="fas fa-car"></i>
+          </div>
+        </div>
+        <div class="stat-footer">
+          <i class="fas fa-arrow-right me-1"></i> Voir les voitures
+        </div>
+      </div>
+    </div>
+
+    <!-- Modèles Card -->
+    <div class="col-xl-3 col-md-6">
+      <div class="stat-card" routerLink="/home/listmodeles" style="cursor: pointer;">
+        <div class="stat-card-body">
+          <div class="stat-info">
+            <span class="stat-label">Modèles</span>
+            <h2 class="stat-value">{{ totalModels }}</h2>
+          </div>
+          <div class="stat-icon" style="background: linear-gradient(135deg, #6f42c1, #9b59b6);">
+            <i class="fas fa-list"></i>
+          </div>
+        </div>
+        <div class="stat-footer">
+          <i class="fas fa-arrow-right me-1"></i> Voir les modèles
+        </div>
+      </div>
+    </div>
+
+    <!-- Users Card -->
+    <div class="col-xl-3 col-md-6">
+      <div class="stat-card" routerLink="/home/listeusers" style="cursor: pointer;">
+        <div class="stat-card-body">
+          <div class="stat-info">
+            <span class="stat-label">Utilisateurs</span>
+            <h2 class="stat-value">{{ totalUsers }}</h2>
+          </div>
+          <div class="stat-icon" style="background: linear-gradient(135deg, #e67e22, #f39c12);">
+            <i class="fas fa-users"></i>
+          </div>
+        </div>
+        <div class="stat-footer">
+          <i class="fas fa-arrow-right me-1"></i> Voir les utilisateurs
+        </div>
+      </div>
+    </div>
+
+    <!-- For Selling Card -->
+    <div class="col-xl-3 col-md-6">
+      <div class="stat-card" routerLink="/home/drag-and-drop" style="cursor: pointer;">
+        <div class="stat-card-body">
+          <div class="stat-info">
+            <span class="stat-label">En Vente</span>
+            <h2 class="stat-value">{{ totalSelling }}</h2>
+          </div>
+          <div class="stat-icon" style="background: linear-gradient(135deg, #27ae60, #2ecc71);">
+            <i class="fas fa-tags"></i>
+          </div>
+        </div>
+        <div class="stat-footer">
+          <i class="fas fa-arrow-right me-1"></i> Voir les ventes
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Cards Row 2 -->
+  <div *ngIf="!isLoading" class="row g-4 mb-4">
+    <!-- Sold Card -->
+    <div class="col-xl-3 col-md-6">
+      <div class="stat-card" routerLink="/home/drag-and-drop" style="cursor: pointer;">
+        <div class="stat-card-body">
+          <div class="stat-info">
+            <span class="stat-label">Vendues</span>
+            <h2 class="stat-value">{{ totalSold }}</h2>
+          </div>
+          <div class="stat-icon" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
+            <i class="fas fa-check-circle"></i>
+          </div>
+        </div>
+        <div class="stat-footer">
+          <i class="fas fa-arrow-right me-1"></i> Voir les vendues
+        </div>
+      </div>
+    </div>
+
+    <!-- Search Card -->
+    <div class="col-xl-3 col-md-6">
+      <div class="stat-card" routerLink="/home/recherche" style="cursor: pointer;">
+        <div class="stat-card-body">
+          <div class="stat-info">
+            <span class="stat-label">Recherche</span>
+            <h2 class="stat-value"><i class="fas fa-search" style="font-size: 1.5rem;"></i></h2>
+          </div>
+          <div class="stat-icon" style="background: linear-gradient(135deg, #3498db, #2980b9);">
+            <i class="fas fa-search"></i>
+          </div>
+        </div>
+        <div class="stat-footer">
+          <i class="fas fa-arrow-right me-1"></i> Rechercher une voiture
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!isLoading && totalVoitures === 0 && totalUsers === 0 && totalModels === 0" class="row">
+    <div class="col-12">
+      <div class="empty-dashboard text-center py-5">
+        <i class="fas fa-database fa-3x mb-3" style="color: #ccc;"></i>
+        <h5 class="text-muted">Aucune donnée disponible</h5>
+        <p class="text-muted">Commencez par ajouter des voitures, des modèles ou des utilisateurs.</p>
+      </div>
+    </div>
+  </div>
+</div>

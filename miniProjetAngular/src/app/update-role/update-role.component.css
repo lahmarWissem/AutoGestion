@@ -1,0 +1,93 @@
+.host {
+    animation: show 0.5s ease-in-out;
+}
+
+@keyframes show {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.form-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+    padding: 32px;
+    border: 1px solid #f0f0f0;
+}
+
+.form-label {
+    font-weight: 600;
+    color: #333;
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+}
+
+.required {
+    color: #e74c3c;
+}
+
+.input-group-text {
+    background: #f8f9fa;
+    border-color: #dee2e6;
+    color: #005a81;
+}
+
+.form-control {
+    border-color: #dee2e6;
+    padding: 10px 14px;
+    font-size: 0.95rem;
+}
+
+.form-control:focus {
+    border-color: #005a81;
+    box-shadow: 0 0 0 3px rgba(0, 90, 129, 0.1);
+}
+
+.form-control.is-invalid {
+    border-color: #e74c3c;
+}
+
+.invalid-feedback {
+    font-size: 0.8rem;
+    color: #e74c3c;
+    margin-top: 4px;
+}
+
+/* Buttons */
+.btn-primary-custom {
+    background: linear-gradient(135deg, #005a81, #0088cc);
+    color: white;
+    border: none;
+    padding: 10px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-primary-custom:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 90, 129, 0.3);
+    color: white;
+}
+
+.btn-primary-custom:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    color: white;
+}
+
+.btn-outline-secondary {
+    border-radius: 8px;
+    padding: 10px 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .form-card {
+        padding: 20px;
+    }
+}

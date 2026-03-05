@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+    <form class="col-12" #modeleForm="ngForm">
+        <div [hidden]="ajout" class="form-group mb-3">
+            <label class="mb-2 fw-bold" style="color: #333 text-dark; font-size: 0.9rem;">Id Modèle</label>
+            <div class="input-group">
+                <span class="input-group-text" style="background: #f8f9fa; border-color: #dee2e6; color: #005a81;"><i
+                        class="fas fa-hashtag"></i></span>
+                <input type="text" [(ngModel)]="modele.idMod" name="idModele" class="form-control" readonly>
+            </div>
+        </div>
+
+        <div class="form-group mb-4">
+            <label class="mb-2 fw-bold" style="color: #333; font-size: 0.9rem;">Nom Modèle <span
+                    class="text-danger">*</span></label>
+            <div class="input-group">
+                <span class="input-group-text" style="background: #f8f9fa; border-color: #dee2e6; color: #005a81;"><i
+                        class="fas fa-cube"></i></span>
+                <input type="text" [(ngModel)]="modele.nomMod" name="nomModele" #nomModele="ngModel" required
+                    minlength="2" class="form-control" placeholder="Entrez un nom de modèle..."
+                    [class.is-invalid]="nomModele.invalid && nomModele.touched">
+            </div>
+            <!-- Validation Messages -->
+            <div class="invalid-feedback d-block mt-2" *ngIf="nomModele.invalid && nomModele.touched"
+                style="font-size: 0.8rem; color: #e74c3c;">
+                <span *ngIf="nomModele.errors?.['required']"><i class="fas fa-exclamation-circle me-1"></i> Le nom du
+                    modèle est obligatoire pour continuer.</span>
+                <span *ngIf="nomModele.errors?.['minlength']"><i class="fas fa-exclamation-circle me-1"></i> Le nom doit
+                    contenir au moins 2 caractères.</span>
+            </div>
+            <!-- Helpful Hint when pristine -->
+            <div class="d-block mt-2" *ngIf="nomModele.pristine || !nomModele.touched"
+                style="font-size: 0.8rem; color: #888;">
+                <i class="fas fa-info-circle me-1"></i> Tapez un nom pour activer le bouton.
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-end mb-2 mt-4">
+            <button type="submit" [disabled]="modeleForm.invalid" class="btn text-white px-4 py-2"
+                (click)="saveModele()"
+                style="background: linear-gradient(135deg, #005a81, #0088cc); font-weight: 600; border-radius: 8px;">
+                <i class="fas me-2" [class.fa-plus-circle]="ajout" [class.fa-save]="!ajout"></i>
+                {{ajout ? 'Ajouter le modèle' : 'Enregistrer les modifications'}}
+            </button>
+        </div>
+    </form>
+</div>
